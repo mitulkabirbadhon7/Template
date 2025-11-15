@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Longest increasing subarray
+int longestIncreasing(vector<int>& arr) {
+    if (arr.empty()) return 0;
+
+    int maxLen = 1, len = 1;
+
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] > arr[i-1]) {
+            len++;
+            if (len > maxLen) maxLen = len;
+        } else {
+            len = 1;
+        }
+    }
+
+    return maxLen;
+}
+
+// Longest consecutive equal elements
+int longestEqual(vector<int>& arr) {
+    if (arr.empty()) return 0;
+
+    int maxLen = 1, len = 1;
+
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] == arr[i-1]) {
+            len++;
+            if (len > maxLen) maxLen = len;
+        } else {
+            len = 1;
+        }
+    }
+
+    return maxLen;
+}
+
+// Longest consecutive '.' in a char array
+int longestDot(vector<char>& arr) {
+    int maxLen = 0, len = 0;
+
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == '.') {
+            len++;
+            if (len > maxLen) maxLen = len;
+        } else {
+            len = 0;
+        }
+    }
+
+    return maxLen;
+}
+
+int main() {
+    // Example 1: Longest increasing subarray
+    vector<int> nums = {1, 2, 2, 3, 4, 1, 2, 3};
+    cout << "Longest increasing: " << longestIncreasing(nums) << "\n";
+
+    // Example 2: Longest consecutive equal numbers
+    cout << "Longest equal: " << longestEqual(nums) << "\n";
+
+    // Example 3: Longest consecutive dots
+    string s = "#...#..##..";
+    vector<char> vs(s.begin(), s.end());
+    cout << "Longest '.': " << longestDot(vs) << "\n";
+
+    return 0;
+}
